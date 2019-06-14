@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <music-box :singList='list' :setVolume='getval' :setProgress='getprogress' @totalTime='totaltime' @currentTime='getime' ref='musicbox'></music-box>
+    <music-box :singList='list' :setVolume='getval' :repeatState="state" :setProgress='getprogress' @totalTime='totaltime' @currentTime='getime' ref='musicbox'></music-box>
     <label>音量设置</label><input type='range' v-model="getval">
     <img src="./assets/logo.png">
     <button @click="next()">下一曲</button>
@@ -37,6 +37,7 @@ export default {
     return {
       getval:0,
       getprogress:0,
+      state:'allCircle',
       list:[
         'http://fs.open.kugou.com/2bb085fa30414868af2dd419e8b5213e/5d02f9a6/G131/M07/10/1D/Y5QEAFrLYY6ACcLBAEDyKN1O2fg382.mp3',
       'http://fs.open.kugou.com/3b671c3055895a9fe3454107bf18f846/5d02f9c2/G012/M02/0A/11/TA0DAFUJxG2ANyJpAD1wRLKAb54110.mp3',
@@ -60,7 +61,7 @@ export default {
       this.$refs.musicbox.last()
     },
     getime(obj){
-       console.log(obj) 
+        console.log(obj) 
     },
     totaltime(obj){
       console.log(obj);

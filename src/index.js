@@ -1,7 +1,7 @@
 import VueComment from './music.vue'
 const comment = {
   install: function(Vue) {
-    Vue.component( 'MusicBox',VueComment)
+    Vue.component('MusicBox',VueComment)
   }
 }
 // 这里的判断很重要
