@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <music-box :singList='list' :SaveVolume='getval' @currentTime='getime' ref='musicbox'></music-box>
-    <input type='range' v-model="getval">
+    <music-box :singList='list' :setVolume='getval' :setProgress='getprogress' @totalTime='totaltime' @currentTime='getime' ref='musicbox'></music-box>
+    <label>音量设置</label><input type='range' v-model="getval">
     <img src="./assets/logo.png">
     <button @click="next()">下一曲</button>
     <button @click="last()">上一曲</button>
+      <button @click="play()">播放暂停</button>
+       <button @click="novoice()">静音</button>
+           <label>进度设置</label><input type='range' v-model="getprogress">
     <!-- <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -33,16 +36,23 @@ export default {
   data () {
     return {
       getval:0,
+      getprogress:0,
       list:[
-        'https://96.f.1ting.com/5d026c51/b1dd80884bb1101679d8c62bd39b3e1f/2019/03/25X/25a_Alu/11.mp3',
-      'https://96.f.1ting.com/5d026c7b/84f5c5cd197d2b33c355bcff4c7889a1/zzzzzmp3/2009bFeb/06C/2/6.mp3',
-      'https://96.f.1ting.com/5d026c99/9452f8505ca900db1f490a9a0f40e2cd/zzzzzmp3/2007CseP/10g_Dance6/4.mp3'
+        'http://fs.open.kugou.com/2bb085fa30414868af2dd419e8b5213e/5d02f9a6/G131/M07/10/1D/Y5QEAFrLYY6ACcLBAEDyKN1O2fg382.mp3',
+      'http://fs.open.kugou.com/3b671c3055895a9fe3454107bf18f846/5d02f9c2/G012/M02/0A/11/TA0DAFUJxG2ANyJpAD1wRLKAb54110.mp3',
+      'http://fs.open.kugou.com/4dcb5335fd7dbce10de341bc33fe4ff0/5d02fa09/G002/M05/05/1F/ooYBAFS7CpKAWXV5ADq0ej59KvI332.mp3'
 
       ],//歌曲路径数组
       msg: 'Welcome to Your Vue.js App'
     }
   },
   methods:{
+    novoice(){
+ this.$refs.musicbox.novoice()
+    },
+    play(){
+ this.$refs.musicbox.playing()
+    },
     next(){
       this.$refs.musicbox.next()
     },
@@ -50,6 +60,9 @@ export default {
       this.$refs.musicbox.last()
     },
     getime(obj){
+       console.log(obj) 
+    },
+    totaltime(obj){
       console.log(obj);
       
     }
